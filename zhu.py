@@ -57,8 +57,8 @@ st.markdown(
             font-family: 'Courier New', Courier, monospace;
         }
 
-        /* Bounce animation for all emojis */
-        .emoji {
+        /* Guitar icon bounce effect */
+        .header h1 .guitar-icon {
             display: inline-block;
             animation: bounce 2s infinite;
         }
@@ -121,12 +121,12 @@ st.markdown(
     """, unsafe_allow_html=True
 )
 
-# Header section with animated emojis
-st.markdown('<div class="header"><h1><span class="emoji">🎶</span> 欢迎来到我的个人音乐网站 <span class="emoji">🎶</span></h1><p>吉他改编教学 | 乐理知识分享 | 即兴实战</p></div>', unsafe_allow_html=True)
+# Header section with pulsing effect and animated guitar icon
+st.markdown('<div class="header"><h1><span class="guitar-icon">🎸</span>欢迎来到我的个人音乐网站 🎶</h1><p>吉他改编教学 | 乐理知识分享 | 即兴实战</p></div>', unsafe_allow_html=True)
 
 # Video selection interface
 st.markdown('<div class="section">', unsafe_allow_html=True)
-st.header('<span class="emoji">🎸</span> 我的作品 <span class="emoji">🎶</span>', unsafe_allow_html=True)
+st.header("🎸 我的作品 🎶")
 
 # List of videos
 videos = {
@@ -146,8 +146,8 @@ st.markdown('</div>', unsafe_allow_html=True)
 
 # Teaching content section
 st.markdown('<div class="section">', unsafe_allow_html=True)
-st.header('<span class="emoji">🎼</span> 吉他教学与乐理分享', unsafe_allow_html=True)
-st.markdown('<div class="music-icon emoji">🎶</div>', unsafe_allow_html=True)
+st.header("🎼 吉他教学与乐理分享")
+st.markdown('<div class="music-icon">🎶</div>', unsafe_allow_html=True)
 st.markdown(
     """
     <p class="content-text">
@@ -159,4 +159,4 @@ st.markdown(
 st.markdown('</div>', unsafe_allow_html=True)
 
 # Footer with contact info
-st.markdown('<div class="footer"><p class="footer-text">微信: D3300741176 <span class="emoji">🎶</span> 期待与你的交流！</p></div>', unsafe_allow_html=True)
+st.markdown('<div class="footer"><p class="footer-text">微信: D3300741176 🎶 期待与你的交流！</p></div>', unsafe_allow_html=True)
