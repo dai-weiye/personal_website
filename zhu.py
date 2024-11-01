@@ -4,7 +4,7 @@ import os
 # Set page title and layout
 st.set_page_config(page_title="个人网页 - 吉他改编教学与乐理分享", layout="centered")
 
-# Custom styles with dynamic background and adjusted title font size
+# Enhanced styles with animations and visual effects
 st.markdown(
     """
     <style>
@@ -14,6 +14,7 @@ st.markdown(
             background-size: 200% 200%;
             animation: gradientBackground 15s ease infinite;
             font-family: Arial, sans-serif;
+            overflow-x: hidden;
         }
 
         /* Gradient animation */
@@ -23,15 +24,22 @@ st.markdown(
             100% { background-position: 0% 50%; }
         }
 
-        /* Header and footer styling */
-        .header, .footer {
-            background-color: #70a1ff;
-            color: white;
-            padding: 20px;
-            text-align: center;
+        /* Pulsing header */
+        .header h1 {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 2em;
+            color: #3867d6;
+            margin-bottom: 0.2em;
+            animation: pulse 2s infinite;
         }
 
-        /* Section styling */
+        /* Pulse effect */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Section glow effect */
         .section {
             background: rgba(255, 255, 255, 0.9);
             padding: 20px;
@@ -42,24 +50,34 @@ st.markdown(
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            animation: fadeIn 1.5s ease forwards;
         }
 
-        /* Adjusted title font size */
-        h1 {
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 2em;
-            color: #3867d6;
-            margin-bottom: 0.2em;
+        /* Glowing border */
+        .section:hover {
+            border-color: #70a1ff;
+            box-shadow: 0 0 20px rgba(112, 161, 255, 0.8);
         }
 
-        h2 {
-            color: #70a1ff;
+        /* Fade-in effect for sections */
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
-        /* Music icon styling */
+        /* Music icon floating effect */
         .music-icon {
             font-size: 1.5em;
             color: #3867d6;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Floating music icon animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
         /* Content text styling */
@@ -111,10 +129,10 @@ st.markdown(
     """, unsafe_allow_html=True
 )
 
-# Header section with adjusted title font size
-st.markdown('<div class="header"><h1>欢迎来到我的个人音乐网站</h1><p>吉他改编教学 | 乐理知识分享 | 即兴实战</p></div>', unsafe_allow_html=True)
+# Header section with animated pulse effect
+st.markdown('<div class="header"><h1>🎶 欢迎来到我的个人音乐网站 🎶</h1><p>吉他改编教学 | 乐理知识分享 | 即兴实战</p></div>', unsafe_allow_html=True)
 
-# Video selection interface
+# Video selection interface with animated section
 st.markdown('<div class="section">', unsafe_allow_html=True)
 st.header("🎸 我的作品")
 st.markdown('<div class="music-icon">🎵</div>', unsafe_allow_html=True)
@@ -135,7 +153,7 @@ st.video(videos[selected_video])
 
 st.markdown('</div>', unsafe_allow_html=True)
 
-# Teaching content section
+# Teaching content section with animated glow effect
 st.markdown('<div class="section">', unsafe_allow_html=True)
 st.header("🎼 吉他教学与乐理分享")
 st.markdown('<div class="music-icon">🎶</div>', unsafe_allow_html=True)
