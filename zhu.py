@@ -3,25 +3,22 @@ import streamlit as st
 # Set page title and layout
 st.set_page_config(page_title="个人网页 - 吉他改编教学与乐理分享", layout="centered")
 
-# Enhanced styles with neon background, floating music notes, and animated, cool font effects
+# Enhanced styles with neon background and floating music notes
 st.markdown(
     """
     <style>
-        /* Neon gradient animated background */
         body {
             background: linear-gradient(135deg, #2a2a72, #009ffd, #2a2a72, #004e92);
             background-size: 400% 400%;
             animation: neonBackground 10s infinite alternate;
             color: #FFFFFF;
-            font-family: 'Arial', sans-serif;
+            font-family: Arial, sans-serif;
             overflow-x: hidden;
         }
         @keyframes neonBackground {
             0% { background-position: 0% 50%; }
             100% { background-position: 100% 50%; }
         }
-
-        /* Floating music notes styling */
         .music-note {
             position: fixed;
             font-size: 1.8em;
@@ -42,21 +39,11 @@ st.markdown(
         .note8 { top: 89vh; left: 75vw; animation-delay: 7s; }
         .note9 { top: 94vh; left: 85vw; animation-delay: 8s; }
         .note10 { top: 91vh; left: 95vw; animation-delay: 9s; }
-
-        /* Cool and glowing text styles */
         .header h1, .section h1, .section h2 {
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
-            color: #fff;
-            text-shadow: 0px 0px 8px #009ffd, 0px 0px 12px #70a1ff, 0px 0px 16px #70a1ff;
-            animation: glowText 3s ease-in-out infinite alternate;
+            color: #FFFFFF;
+            text-shadow: 0 0 10px #70a1ff, 0 0 20px #70a1ff;
+            font-family: 'Courier New', Courier, monospace;
         }
-        @keyframes glowText {
-            0% { color: #70a1ff; text-shadow: 0 0 10px #70a1ff, 0 0 20px #70a1ff, 0 0 30px #009ffd, 0 0 40px #009ffd; }
-            100% { color: #009ffd; text-shadow: 0 0 15px #70a1ff, 0 0 25px #70a1ff, 0 0 35px #70a1ff, 0 0 45px #009ffd; }
-        }
-
-        /* Guitar icon with bounce animation */
         .header h1 .guitar-icon {
             display: inline-block;
             animation: bounce 2s infinite;
@@ -65,8 +52,6 @@ st.markdown(
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-8px); }
         }
-
-        /* Section styling with glowing effect */
         .section {
             background: rgba(255, 255, 255, 0.1);
             padding: 20px;
@@ -84,16 +69,10 @@ st.markdown(
             0% { opacity: 0; transform: translateY(20px); }
             100% { opacity: 1; transform: translateY(0); }
         }
-
-        /* Content text styling */
         .content-text {
             color: #FFFFFF;
             font-size: 1.1em;
-            font-family: 'Courier New', monospace;
-            text-shadow: 0px 0px 5px #009ffd;
         }
-
-        /* Footer text styling */
         .footer-text {
             font-size: 0.9em;
             color: #ffffff;
@@ -102,7 +81,7 @@ st.markdown(
     """, unsafe_allow_html=True
 )
 
-# Floating music notes
+# Adding floating music notes across the page
 st.markdown(
     """
     <div class="music-note note1">🎶</div>
@@ -118,10 +97,10 @@ st.markdown(
     """, unsafe_allow_html=True
 )
 
-# Header section with pulsing text
+# Header section
 st.markdown('<div class="header"><h1><span class="guitar-icon">🎸</span>欢迎来到我的个人音乐网站 🎶</h1><p>吉他改编教学 | 乐理知识分享 | 即兴实战</p></div>', unsafe_allow_html=True)
 
-# Video selection interface
+# Video selection section
 st.markdown('<div class="section">', unsafe_allow_html=True)
 st.header("🎸 我的作品 🎶")
 videos = {
@@ -148,5 +127,5 @@ st.markdown(
 )
 st.markdown('</div>', unsafe_allow_html=True)
 
-# Footer with contact info
+# Footer
 st.markdown('<div class="footer"><p class="footer-text">微信: D3300741176 🎶 期待与你的交流！</p></div>', unsafe_allow_html=True)
