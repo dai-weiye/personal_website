@@ -57,6 +57,18 @@ st.markdown(
             font-family: 'Courier New', Courier, monospace;
         }
 
+        /* Guitar icon bounce effect */
+        .header h1 .guitar-icon {
+            display: inline-block;
+            animation: bounce 2s infinite;
+        }
+
+        /* Bounce animation */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
         /* Glowing sections */
         .section {
             background: rgba(255, 255, 255, 0.1);
@@ -76,19 +88,6 @@ st.markdown(
         @keyframes fadeIn {
             0% { opacity: 0; transform: translateY(20px); }
             100% { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Floating music icon effect */
-        .music-icon {
-            font-size: 1.5em;
-            color: #70a1ff;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        /* Floating icon animation */
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
         }
 
         /* Content text styling */
@@ -122,13 +121,12 @@ st.markdown(
     """, unsafe_allow_html=True
 )
 
-# Header section with pulsing effect
-st.markdown('<div class="header"><h1>🎶 欢迎来到我的个人音乐网站 🎶</h1><p>吉他改编教学 | 乐理知识分享 | 即兴实战</p></div>', unsafe_allow_html=True)
+# Header section with pulsing effect and animated guitar icon
+st.markdown('<div class="header"><h1><span class="guitar-icon">🎸</span>欢迎来到我的个人音乐网站 🎶</h1><p>吉他改编教学 | 乐理知识分享 | 即兴实战</p></div>', unsafe_allow_html=True)
 
 # Video selection interface
 st.markdown('<div class="section">', unsafe_allow_html=True)
-st.header("🎸 我的作品")
-st.markdown('<div class="music-icon">🎵</div>', unsafe_allow_html=True)
+st.header("🎸 我的作品 🎶")
 
 # List of videos
 videos = {
