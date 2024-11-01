@@ -106,14 +106,14 @@ st.markdown(
     """
     <div class="music-note">🎵</div>
     <div class="music-note">🎶</div>
-    <div class="music-note">🎵</div>
+    <div class="music-note">🎸</div>
     <div class="music-note">🎶</div>
     <div class="music-note">🎵</div>
     """, unsafe_allow_html=True
 )
 
 # 页面头部信息，加入音乐图标
-st.markdown('<div class="header"><h1>🎶 欢迎来到我的个人音乐网站 🎶</h1><p>吉他改编教学 | 乐理知识分享 | 即兴实战</p></div>', unsafe_allow_html=True)
+st.markdown('<div class="header"><h2>🎶 欢迎来到我的个人音乐网站 🎶</h2><p>吉他改编教学 | 乐理知识分享 | 即兴实战</p></div>', unsafe_allow_html=True)
 
 # 我的作品展示部分，带有音乐图标
 st.markdown('<div class="section">', unsafe_allow_html=True)
@@ -139,7 +139,7 @@ st.markdown('</div>', unsafe_allow_html=True)
 # 教学内容简介，加入乐谱符号图标
 st.markdown('<div class="section">', unsafe_allow_html=True)
 st.header("🎼 吉他教学与乐理分享")
-st.markdown('<div class="music-icon">🎶</div>', unsafe_allow_html=True)
+st.markdown('<div class="music-icon🎸</div>', unsafe_allow_html=True)
 st.markdown(
     """
     <p class="content-text">
