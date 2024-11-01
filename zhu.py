@@ -10,6 +10,7 @@ st.markdown(
         body {
             background: linear-gradient(to right, #c2e9fb, #a1c4fd);
             font-family: Arial, sans-serif;
+            overflow: hidden; /* 防止出现滚动条 */
         }
         .header, .footer {
             background-color: #70a1ff;
@@ -52,7 +53,61 @@ st.markdown(
             font-size: 0.9em;
             color: #ffffff;
         }
+        /* 添加动态音符的样式 */
+        .music-note {
+            position: absolute;
+            bottom: -50px;
+            font-size: 30px;
+            color: #ffffff;
+            animation: floatUp 10s infinite;
+            opacity: 0;
+        }
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-110vh);
+                opacity: 0;
+            }
+        }
+        /* 创建多个音符，使用不同的动画延迟和位置 */
+        .music-note:nth-child(1) {
+            left: 10%;
+            animation-delay: 0s;
+        }
+        .music-note:nth-child(2) {
+            left: 30%;
+            animation-delay: 2s;
+        }
+        .music-note:nth-child(3) {
+            left: 50%;
+            animation-delay: 4s;
+        }
+        .music-note:nth-child(4) {
+            left: 70%;
+            animation-delay: 6s;
+        }
+        .music-note:nth-child(5) {
+            left: 90%;
+            animation-delay: 8s;
+        }
     </style>
+    """, unsafe_allow_html=True
+)
+
+# 添加动态音符的HTML代码
+st.markdown(
+    """
+    <div class="music-note">🎵</div>
+    <div class="music-note">🎶</div>
+    <div class="music-note">🎵</div>
+    <div class="music-note">🎶</div>
+    <div class="music-note">🎵</div>
     """, unsafe_allow_html=True
 )
 
