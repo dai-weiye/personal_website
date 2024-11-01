@@ -156,6 +156,21 @@ st.markdown(
             animation-delay: 8s;
             font-size: 26px;
         }
+
+        /* 视频花边样式 */
+        .video-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 30px;
+        }
+
+        .video-frame {
+            border: 10px solid transparent;
+            padding: 10px;
+            border-image-source: url('https://i.imgur.com/your_border_image.png'); /* 替换为您的花边图片URL */
+            border-image-slice: 30;
+            border-image-repeat: round;
+        }
     </style>
     """, unsafe_allow_html=True
 )
@@ -185,14 +200,25 @@ st.header("🎸 我的作品")
 st.markdown('<div class="music-icon">🎵</div>', unsafe_allow_html=True)
 
 # 视频展示
-st.subheader("APT.")
-st.video("WeChat_20241101195742.mp4")  # 请确保视频文件位于应用程序运行的目录中
+def display_video(title, video_file):
+    st.subheader(title)
+    video_bytes = open(video_file, 'rb').read()
+    st.markdown(
+        f"""
+        <div class="video-container">
+            <div class="video-frame">
+                <video controls width="700">
+                    <source src="data:video/mp4;base64,{video_bytes.decode('utf-8')}" type="video/mp4">
+                </video>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
-st.subheader("穿越时空的思念")
-st.video("cyskdsn.mp4")  # 请将对应的视频文件放在相应的位置
-
-st.subheader("春泥")
-st.video("cn.mp4")  # 请将对应的视频文件放在相应的位置
+display_video("APT.", "WeChat_20241101195742.mp4")
+display_video("穿越时空的思念", "cyskdsn.mp4")
+display_video("春泥", "cn.mp4")
 
 # 结束作品展示部分
 st.markdown('</div>', unsafe_allow_html=True)
