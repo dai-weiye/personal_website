@@ -125,10 +125,10 @@ st.subheader("APT.")
 st.video("WeChat_20241101195742.mp4")  # 请确保视频文件位于应用程序运行的目录中
 
 st.subheader("穿越时空的思念")
-st.video("穿越时空的思念.mp4")  # 请将对应的视频文件放在相应的位置
+st.video("cyskdsn.mp4")  # 请将对应的视频文件放在相应的位置
 
 st.subheader("春泥")
-st.video("春泥.mp4")  # 请将对应的视频文件放在相应的位置
+st.video("cn.mp4")  # 请将对应的视频文件放在相应的位置
 
 # 结束作品展示部分
 st.markdown('</div>', unsafe_allow_html=True)
