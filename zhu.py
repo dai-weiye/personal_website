@@ -113,7 +113,7 @@ st.markdown(
 )
 
 # 页面头部信息，加入音乐图标
-st.markdown('<div class="header"><h1>🎶 欢迎来到我的个人音乐天地 🎶</h1><p>吉他改编教学 | 乐理知识分享 | 即兴实战</p></div>', unsafe_allow_html=True)
+st.markdown('<div class="header"><h1>🎶 欢迎来到我的个人音乐网站 🎶</h1><p>吉他改编教学 | 乐理知识分享 | 即兴实战</p></div>', unsafe_allow_html=True)
 
 # 我的作品展示部分，带有音乐图标
 st.markdown('<div class="section">', unsafe_allow_html=True)
@@ -122,16 +122,22 @@ st.markdown('<div class="music-icon">🎵</div>', unsafe_allow_html=True)
 
 # 视频展示
 st.subheader("APT.")
-st.video(r"WeChat_20241101195742.mp4")  # 请确认路径正确
+st.video("WeChat_20241101195742.mp4")  # 请确保视频文件位于应用程序运行的目录中
 
-# 教学文档展示
+st.subheader("穿越时空的思念")
+st.video("穿越时空的思念.mp4")  # 请将对应的视频文件放在相应的位置
+
+st.subheader("春泥")
+st.video("春泥.mp4")  # 请将对应的视频文件放在相应的位置
+
+# 结束作品展示部分
 st.markdown('</div>', unsafe_allow_html=True)
 
 # 教学内容简介，加入乐谱符号图标
 st.markdown('<div class="section">', unsafe_allow_html=True)
 st.header("🎼 吉他教学与乐理分享")
 st.markdown('<div class="music-icon">🎶</div>', unsafe_allow_html=True)
-st.write(
+st.markdown(
     """
     <p class="content-text">
     在这里，我会分享吉他改编的技巧、基础乐理知识以及即兴演奏的实战经验，帮助你更深入理解音乐创作。
