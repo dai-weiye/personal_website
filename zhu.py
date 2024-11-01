@@ -1,4 +1,5 @@
 import streamlit as st
+import os
 
 # 设置页面标题和布局
 st.set_page_config(page_title="个人网页 - 吉他改编教学与乐理分享", layout="centered")
@@ -121,7 +122,9 @@ st.markdown('<div class="music-icon">🎵</div>', unsafe_allow_html=True)
 
 # 视频展示
 st.subheader("APT.")
-st.video(r"D:\个人文件\music_video\WeChat_20241101195742.mp4")  # 请确认路径正确
+
+video_path = os.path.join('videos', 'WeChat_20241101195742.mp4')
+st.video(video_path)
 
 # 教学文档展示
 st.markdown('</div>', unsafe_allow_html=True)
