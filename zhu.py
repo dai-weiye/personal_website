@@ -1,5 +1,4 @@
 import streamlit as st
-import streamlit.components.v1 as components
 import os
 
 # 设置页面标题和布局
@@ -13,8 +12,6 @@ st.markdown(
             background: linear-gradient(to right, #c2e9fb, #a1c4fd);
             font-family: Arial, sans-serif;
             overflow: hidden; /* 防止出现滚动条 */
-            margin: 0;
-            padding: 0;
         }
         .header, .footer {
             background-color: #70a1ff;
@@ -39,9 +36,8 @@ st.markdown(
             color: #3867d6;
         }
         h1 {
-            font-size: 2em; /* 将字体大小从2.5em调小到2em */
+            font-size: 2.5em;
             margin-bottom: 0.2em;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
         h2 {
             color: #70a1ff;
@@ -101,34 +97,6 @@ st.markdown(
             left: 90%;
             animation-delay: 8s;
         }
-        /* 视频花边样式 */
-        .video-container {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 30px;
-        }
-
-        .video-frame {
-            border: 15px solid transparent;
-            padding: 10px;
-            border-image-source: url('https://i.imgur.com/FKJ1KcA.png'); /* 请替换为您的花边图片URL */
-            border-image-slice: 30;
-            border-image-repeat: round;
-            border-image-width: 15px;
-            display: inline-block;
-        }
-
-        .video-frame video {
-            width: 100%;
-            height: auto;
-        }
-
-        /* 调整视频容器的宽度以适应页面 */
-        @media (max-width: 820px) {
-            .video-frame video {
-                width: 100%;
-            }
-        }
     </style>
     """, unsafe_allow_html=True
 )
@@ -152,60 +120,18 @@ st.markdown('<div class="section">', unsafe_allow_html=True)
 st.header("🎸 我的作品")
 st.markdown('<div class="music-icon">🎵</div>', unsafe_allow_html=True)
 
-# 视频展示函数，包含互斥播放功能
-def display_videos(video_dict):
-    """
-    显示多个视频，并确保播放一个视频时暂停其他视频。
+# 视频展示
+st.subheader("APT.")
+st.video("WeChat_20241101195742.mp4")  # 请确保视频文件位于应用程序运行的目录中
 
-    参数:
-    - video_dict: 字典，键为视频标题，值为视频文件路径或URL
-    """
-    # 构建所有视频的HTML
-    videos_html = ""
-    script_js = """
-    <script>
-        const videos = document.querySelectorAll('video');
-        videos.forEach(video => {
-            video.addEventListener('play', () => {
-                videos.forEach(v => {
-                    if (v !== video) {
-                        v.pause();
-                    }
-                });
-            });
-        });
-    </script>
-    """
-    for idx, (title, src) in enumerate(video_dict.items(), start=1):
-        videos_html += f"""
-        <h2>{title}</h2>
-        <div class="video-container">
-            <div class="video-frame">
-                <video controls>
-                    <source src="{src}" type="video/mp4">
-                    您的浏览器不支持视频标签。
-                </video>
-            </div>
-        </div>
-        """
-    # 将视频和脚本嵌入到一个HTML块中
-    full_html = f"""
-    {videos_html}
-    {script_js}
-    """
-    # 使用components.html嵌入视频
-    components.html(full_html, height=1000, scrolling=True)
+st.subheader("穿越时空的思念")
+st.video("cyskdsn.mp4")  # 请将对应的视频文件放在相应的位置
 
-# 定义视频标题和路径
-videos = {
-    "APT.": "WeChat_20241101195742.mp4",
-    "穿越时空的思念": "cyskdsn.mp4",
-    "春泥": "cn.mp4",
-    "海阔天空": "hktk.mp4"
-}
+st.subheader("春泥")
+st.video("cn.mp4")  # 请将对应的视频文件放在相应的位置
 
-# 调用函数显示视频
-display_videos(videos)
+st.subheader("海阔天空")
+st.video("hktk.mp4")  # 请将“海阔天空”的视频文件放在相应的位置
 
 # 结束作品展示部分
 st.markdown('</div>', unsafe_allow_html=True)
