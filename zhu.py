@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 import os
 
 # 设置页面标题和布局
@@ -38,6 +39,7 @@ st.markdown(
         h1 {
             font-size: 2em; /* 将字体大小从2.5em调小到2em */
             margin-bottom: 0.2em;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
         h2 {
             color: #70a1ff;
@@ -97,6 +99,34 @@ st.markdown(
             left: 90%;
             animation-delay: 8s;
         }
+        /* 视频花边样式 */
+        .video-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 30px;
+        }
+
+        .video-frame {
+            border: 15px solid transparent;
+            padding: 10px;
+            border-image-source: url('https://i.imgur.com/FKJ1KcA.png'); /* 请替换为您的花边图片URL */
+            border-image-slice: 30;
+            border-image-repeat: round;
+            border-image-width: 15px;
+            display: inline-block;
+        }
+
+        .video-frame video {
+            width: 100%;
+            height: auto;
+        }
+
+        /* 调整视频容器的宽度以适应页面 */
+        @media (max-width: 820px) {
+            .video-frame video {
+                width: 100%;
+            }
+        }
     </style>
     """, unsafe_allow_html=True
 )
@@ -113,25 +143,53 @@ st.markdown(
 )
 
 # 页面头部信息，加入音乐图标
-st.markdown('<div class="header"><h1>🎶 欢迎来到我的个人音乐网🎸</h1><p>吉他改编教学 | 乐理知识分享 | 即兴实战</p></div>', unsafe_allow_html=True)
+st.markdown('<div class="header"><h1>🎶 欢迎来到我的个人音乐网站 🎶</h1><p>吉他改编教学 | 乐理知识分享 | 即兴实战</p></div>', unsafe_allow_html=True)
 
 # 我的作品展示部分，带有音乐图标
 st.markdown('<div class="section">', unsafe_allow_html=True)
 st.header("🎸 我的作品")
 st.markdown('<div class="music-icon">🎵</div>', unsafe_allow_html=True)
 
-# 视频展示
-st.subheader("APT.")
-st.video("WeChat_20241101195742.mp4")  # 请确保视频文件位于应用程序运行的目录中
+# 视频展示函数，包含互斥播放功能
+def display_video(title, video_file, video_id):
+    """
+    显示视频，并确保播放一个视频时暂停其他视频。
 
-st.subheader("穿越时空的思念")
-st.video("cyskdsn.mp4")  # 请将对应的视频文件放在相应的位置
+    参数:
+    - title: 视频标题
+    - video_file: 视频文件路径或URL
+    - video_id: 视频的唯一ID
+    """
+    # 构建视频HTML
+    video_html = f"""
+    <div class="video-container">
+        <div class="video-frame">
+            <video id="{video_id}" controls width="700">
+                <source src="{video_file}" type="video/mp4">
+                您的浏览器不支持视频标签。
+            </video>
+        </div>
+    </div>
+    <script>
+        const currentVideo = document.getElementById("{video_id}");
+        const videos = document.querySelectorAll('video');
+        currentVideo.addEventListener('play', () => {{
+            videos.forEach(video => {{
+                if (video !== currentVideo) {{
+                    video.pause();
+                }}
+            }});
+        }});
+    </script>
+    """
+    # 使用components.html嵌入视频
+    components.html(video_html, height=450, scrolling=True)
 
-st.subheader("春泥")
-st.video("cn.mp4")  # 请将对应的视频文件放在相应的位置
-
-st.subheader("海阔天空")
-st.video("hktk.mp4")  # 请将“海阔天空”的视频文件放在相应的位置
+# 请确保视频文件位于应用程序运行的目录中，或者提供正确的路径或URL
+display_video("APT.", "WeChat_20241101195742.mp4", "video1")
+display_video("穿越时空的思念", "cyskdsn.mp4", "video2")
+display_video("春泥", "cn.mp4", "video3")
+display_video("海阔天空", "hktk.mp4", "video4")  # 新增视频
 
 # 结束作品展示部分
 st.markdown('</div>', unsafe_allow_html=True)
@@ -139,7 +197,7 @@ st.markdown('</div>', unsafe_allow_html=True)
 # 教学内容简介，加入乐谱符号图标
 st.markdown('<div class="section">', unsafe_allow_html=True)
 st.header("🎼 吉他教学与乐理分享")
-st.markdown('<div class="music-icon>📻</div>', unsafe_allow_html=True)
+st.markdown('<div class="music-icon">🎶</div>', unsafe_allow_html=True)
 st.markdown(
     """
     <p class="content-text">
