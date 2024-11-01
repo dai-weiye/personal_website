@@ -122,9 +122,7 @@ st.markdown('<div class="music-icon">🎵</div>', unsafe_allow_html=True)
 
 # 视频展示
 st.subheader("APT.")
-
-video_path = os.path.join('videos', 'WeChat_20241101195742.mp4')
-st.video(video_path)
+st.video(r"WeChat_20241101195742.mp4")  # 请确认路径正确
 
 # 教学文档展示
 st.markdown('</div>', unsafe_allow_html=True)
