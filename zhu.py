@@ -13,6 +13,8 @@ st.markdown(
             background: linear-gradient(to right, #c2e9fb, #a1c4fd);
             font-family: Arial, sans-serif;
             overflow: hidden; /* 防止出现滚动条 */
+            margin: 0;
+            padding: 0;
         }
         .header, .footer {
             background-color: #70a1ff;
@@ -151,45 +153,59 @@ st.header("🎸 我的作品")
 st.markdown('<div class="music-icon">🎵</div>', unsafe_allow_html=True)
 
 # 视频展示函数，包含互斥播放功能
-def display_video(title, video_file, video_id):
+def display_videos(video_dict):
     """
-    显示视频，并确保播放一个视频时暂停其他视频。
+    显示多个视频，并确保播放一个视频时暂停其他视频。
 
     参数:
-    - title: 视频标题
-    - video_file: 视频文件路径或URL
-    - video_id: 视频的唯一ID
+    - video_dict: 字典，键为视频标题，值为视频文件路径或URL
     """
-    # 构建视频HTML
-    video_html = f"""
-    <div class="video-container">
-        <div class="video-frame">
-            <video id="{video_id}" controls width="700">
-                <source src="{video_file}" type="video/mp4">
-                您的浏览器不支持视频标签。
-            </video>
-        </div>
-    </div>
+    # 构建所有视频的HTML
+    videos_html = ""
+    script_js = """
     <script>
-        const currentVideo = document.getElementById("{video_id}");
         const videos = document.querySelectorAll('video');
-        currentVideo.addEventListener('play', () => {{
-            videos.forEach(video => {{
-                if (video !== currentVideo) {{
-                    video.pause();
-                }}
-            }});
-        }});
+        videos.forEach(video => {
+            video.addEventListener('play', () => {
+                videos.forEach(v => {
+                    if (v !== video) {
+                        v.pause();
+                    }
+                });
+            });
+        });
     </script>
     """
+    for idx, (title, src) in enumerate(video_dict.items(), start=1):
+        videos_html += f"""
+        <h2>{title}</h2>
+        <div class="video-container">
+            <div class="video-frame">
+                <video controls>
+                    <source src="{src}" type="video/mp4">
+                    您的浏览器不支持视频标签。
+                </video>
+            </div>
+        </div>
+        """
+    # 将视频和脚本嵌入到一个HTML块中
+    full_html = f"""
+    {videos_html}
+    {script_js}
+    """
     # 使用components.html嵌入视频
-    components.html(video_html, height=450, scrolling=True)
+    components.html(full_html, height=1000, scrolling=True)
 
-# 请确保视频文件位于应用程序运行的目录中，或者提供正确的路径或URL
-display_video("APT.", "WeChat_20241101195742.mp4", "video1")
-display_video("穿越时空的思念", "cyskdsn.mp4", "video2")
-display_video("春泥", "cn.mp4", "video3")
-display_video("海阔天空", "hktk.mp4", "video4")  # 新增视频
+# 定义视频标题和路径
+videos = {
+    "APT.": "WeChat_20241101195742.mp4",
+    "穿越时空的思念": "cyskdsn.mp4",
+    "春泥": "cn.mp4",
+    "海阔天空": "hktk.mp4"
+}
+
+# 调用函数显示视频
+display_videos(videos)
 
 # 结束作品展示部分
 st.markdown('</div>', unsafe_allow_html=True)
