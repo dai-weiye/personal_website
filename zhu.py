@@ -130,6 +130,9 @@ st.video("cyskdsn.mp4")  # 请将对应的视频文件放在相应的位置
 st.subheader("春泥")
 st.video("cn.mp4")  # 请将对应的视频文件放在相应的位置
 
+st.subheader("海阔天空")
+st.video("hktk.mp4")  # 请将“海阔天空”的视频文件放在相应的位置
+
 # 结束作品展示部分
 st.markdown('</div>', unsafe_allow_html=True)
 
