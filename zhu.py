@@ -1,10 +1,9 @@
 import streamlit as st
-import random
 
 # Set page title and layout
 st.set_page_config(page_title="个人网页 - 吉他改编教学与乐理分享", layout="centered")
 
-# Enhanced styles with neon background, floating music notes, and animated borders
+# Enhanced styles with neon background and floating music notes
 st.markdown(
     """
     <style>
@@ -101,7 +100,7 @@ st.markdown(
 # Header section
 st.markdown('<div class="header"><h1><span class="guitar-icon">🎸</span>欢迎来到我的个人音乐网站 🎶</h1><p>吉他改编教学 | 乐理知识分享 | 即兴实战</p></div>', unsafe_allow_html=True)
 
-# Video selection and progress bar
+# Video selection section
 st.markdown('<div class="section">', unsafe_allow_html=True)
 st.header("🎸 我的作品 🎶")
 videos = {
@@ -112,13 +111,9 @@ videos = {
 }
 selected_video = st.selectbox("选择一个视频播放：", options=list(videos.keys()))
 st.video(videos[selected_video])
-
-# Display progress bar for demo purposes
-progress_value = st.slider("调整播放进度", 0, 100, 0)
-st.progress(progress_value)
 st.markdown('</div>', unsafe_allow_html=True)
 
-# Teaching content section with tips
+# Teaching content section
 st.markdown('<div class="section">', unsafe_allow_html=True)
 st.header("🎼 吉他教学与乐理分享")
 st.markdown('<div class="music-icon">🎶</div>', unsafe_allow_html=True)
@@ -130,37 +125,6 @@ st.markdown(
     </p>
     """, unsafe_allow_html=True
 )
-
-# Display a random guitar tip
-tips = [
-    "💡 小贴士：每天坚持练习15分钟，比偶尔一次练习两个小时更有效！",
-    "💡 小贴士：掌握基础和弦转换能让你弹出更多的歌曲！",
-    "💡 小贴士：试试不同的拨弦手法，可以让音乐表现更丰富！",
-    "💡 小贴士：学习分解和弦能带来更多即兴演奏的可能性！"
-]
-st.markdown(f"<p class='content-text'>{random.choice(tips)}</p>", unsafe_allow_html=True)
-st.markdown('</div>', unsafe_allow_html=True)
-
-# Contact and Feedback Section
-st.markdown('<div class="section">', unsafe_allow_html=True)
-st.header("📬 联系我")
-
-st.markdown(
-    """
-    <p class="content-text">想要更深入的交流？填写以下反馈表单，或者直接通过微信联系我！</p>
-    """,
-    unsafe_allow_html=True
-)
-
-# Feedback form
-name = st.text_input("你的名字")
-message = st.text_area("反馈或建议")
-if st.button("提交"):
-    if name and message:
-        st.success("感谢你的反馈！我会尽快回复。🎉")
-    else:
-        st.warning("请完整填写表单。")
-
 st.markdown('</div>', unsafe_allow_html=True)
 
 # Footer
