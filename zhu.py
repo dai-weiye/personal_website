@@ -1,24 +1,23 @@
 import streamlit as st
 import os
 
-# 设置页面标题和布局
+# Set page title and layout
 st.set_page_config(page_title="个人网页 - 吉他改编教学与乐理分享", layout="centered")
 
-# 自定义页面样式，包含音乐元素和渐变背景
+# Custom styles with music elements and gradient background
 st.markdown(
     """
     <style>
         body {
             background: linear-gradient(to right, #c2e9fb, #a1c4fd);
             font-family: Arial, sans-serif;
-            overflow: hidden; /* 防止出现滚动条 */
+            overflow: hidden;
         }
         .header, .footer {
             background-color: #70a1ff;
             color: white;
             padding: 20px;
             text-align: center;
-            font-family: Arial, sans-serif;
         }
         .section {
             background: rgba(255, 255, 255, 0.9);
@@ -35,13 +34,6 @@ st.markdown(
             font-family: 'Courier New', Courier, monospace;
             color: #3867d6;
         }
-        h1 {
-            font-size: 2.5em;
-            margin-bottom: 0.2em;
-        }
-        h2 {
-            color: #70a1ff;
-        }
         .music-icon {
             font-size: 1.5em;
             color: #3867d6;
@@ -54,7 +46,7 @@ st.markdown(
             font-size: 0.9em;
             color: #ffffff;
         }
-        /* 添加动态音符的样式 */
+        /* Animated music notes */
         .music-note {
             position: absolute;
             bottom: -50px;
@@ -64,44 +56,20 @@ st.markdown(
             opacity: 0;
         }
         @keyframes floatUp {
-            0% {
-                transform: translateY(0);
-                opacity: 0;
-            }
-            50% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-110vh);
-                opacity: 0;
-            }
+            0% { transform: translateY(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-110vh); opacity: 0; }
         }
-        /* 创建多个音符，使用不同的动画延迟和位置 */
-        .music-note:nth-child(1) {
-            left: 10%;
-            animation-delay: 0s;
-        }
-        .music-note:nth-child(2) {
-            left: 30%;
-            animation-delay: 2s;
-        }
-        .music-note:nth-child(3) {
-            left: 50%;
-            animation-delay: 4s;
-        }
-        .music-note:nth-child(4) {
-            left: 70%;
-            animation-delay: 6s;
-        }
-        .music-note:nth-child(5) {
-            left: 90%;
-            animation-delay: 8s;
-        }
+        .music-note:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .music-note:nth-child(2) { left: 30%; animation-delay: 2s; }
+        .music-note:nth-child(3) { left: 50%; animation-delay: 4s; }
+        .music-note:nth-child(4) { left: 70%; animation-delay: 6s; }
+        .music-note:nth-child(5) { left: 90%; animation-delay: 8s; }
     </style>
     """, unsafe_allow_html=True
 )
 
-# 添加动态音符的HTML代码
+# Adding floating music notes
 st.markdown(
     """
     <div class="music-note">🎵</div>
@@ -112,31 +80,31 @@ st.markdown(
     """, unsafe_allow_html=True
 )
 
-# 页面头部信息，加入音乐图标
+# Header section with music icon
 st.markdown('<div class="header"><h1>🎶 欢迎来到我的个人音乐网站 🎶</h1><p>吉他改编教学 | 乐理知识分享 | 即兴实战</p></div>', unsafe_allow_html=True)
 
-# 我的作品展示部分，带有音乐图标
+# Video selection interface
 st.markdown('<div class="section">', unsafe_allow_html=True)
 st.header("🎸 我的作品")
 st.markdown('<div class="music-icon">🎵</div>', unsafe_allow_html=True)
 
-# 视频展示
-st.subheader("APT.")
-st.video("WeChat_20241101195742.mp4")  # 请确保视频文件位于应用程序运行的目录中
+# List of videos
+videos = {
+    "APT.": "WeChat_20241101195742.mp4",
+    "穿越时空的思念": "cyskdsn.mp4",
+    "春泥": "cn.mp4",
+    "海阔天空": "hktk.mp4"
+}
 
-st.subheader("穿越时空的思念")
-st.video("cyskdsn.mp4")  # 请将对应的视频文件放在相应的位置
+# Dropdown for video selection
+selected_video = st.selectbox("选择一个视频播放：", options=list(videos.keys()))
 
-st.subheader("春泥")
-st.video("cn.mp4")  # 请将对应的视频文件放在相应的位置
+# Display the selected video
+st.video(videos[selected_video])
 
-st.subheader("海阔天空")
-st.video("hktk.mp4")  # 请将“海阔天空”的视频文件放在相应的位置
-
-# 结束作品展示部分
 st.markdown('</div>', unsafe_allow_html=True)
 
-# 教学内容简介，加入乐谱符号图标
+# Teaching content section
 st.markdown('<div class="section">', unsafe_allow_html=True)
 st.header("🎼 吉他教学与乐理分享")
 st.markdown('<div class="music-icon">🎶</div>', unsafe_allow_html=True)
@@ -150,5 +118,5 @@ st.markdown(
 )
 st.markdown('</div>', unsafe_allow_html=True)
 
-# 页面底部联系方式，带有音乐符号
+# Footer with contact info
 st.markdown('<div class="footer"><p class="footer-text">微信: D3300741176 🎶 期待与你的交流！</p></div>', unsafe_allow_html=True)
