@@ -4,7 +4,7 @@ import os
 # Set page title and layout
 st.set_page_config(page_title="个人网页 - 吉他改编教学与乐理分享", layout="centered")
 
-# Enhanced styles with neon background and floating music notes
+# Enhanced styles with neon background and styled video thumbnails
 st.markdown(
     """
     <style>
@@ -24,113 +24,108 @@ st.markdown(
             100% { background-position: 100% 50%; }
         }
 
-        /* Floating music notes across the screen */
-        .music-note {
-            position: fixed;
-            font-size: 1.8em;
-            color: rgba(255, 255, 255, 0.6);
-            animation: floatNote 8s infinite linear;
+        /* Video thumbnails styling */
+        .video-thumbnail {
+            position: relative;
+            width: 100%;
+            max-width: 250px;
+            margin: 10px;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
-
-        /* Floating music note animation */
-        @keyframes floatNote {
-            0% { transform: translateY(0) translateX(0); }
-            100% { transform: translateY(-100vh) translateX(10vw); }
-        }
-
-        /* Place music notes in different locations with unique delays */
-        .note1 { top: 90vh; left: 5vw; animation-delay: 0s; }
-        .note2 { top: 85vh; left: 15vw; animation-delay: 1s; }
-        .note3 { top: 95vh; left: 25vw; animation-delay: 2s; }
-        .note4 { top: 88vh; left: 35vw; animation-delay: 3s; }
-        .note5 { top: 93vh; left: 45vw; animation-delay: 4s; }
-        .note6 { top: 87vh; left: 55vw; animation-delay: 5s; }
-        .note7 { top: 92vh; left: 65vw; animation-delay: 6s; }
-        .note8 { top: 89vh; left: 75vw; animation-delay: 7s; }
-        .note9 { top: 94vh; left: 85vw; animation-delay: 8s; }
-        .note10 { top: 91vh; left: 95vw; animation-delay: 9s; }
-
-        /* Glowing text effects */
-        .header h1, .section h1, .section h2 {
-            color: #FFFFFF;
-            text-shadow: 0 0 10px #70a1ff, 0 0 20px #70a1ff;
-            font-family: 'Courier New', Courier, monospace;
-        }
-
-        /* Glowing sections */
-        .section {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 12px;
+        .video-thumbnail:hover {
+            transform: scale(1.05);
             box-shadow: 0px 4px 15px rgba(112, 161, 255, 0.8);
-            margin-bottom: 20px;
-            text-align: center;
+        }
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2em;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .video-thumbnail:hover .video-overlay {
+            opacity: 1;
+        }
+
+        /* Thumbnail container */
+        .video-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        /* Modal for video playback */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+        .modal-content {
+            position: relative;
             max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            animation: fadeIn 1.5s ease forwards;
+            width: 100%;
+            padding: 20px;
+            background-color: #1b1b32;
+            border-radius: 8px;
         }
-
-        /* Fade-in effect for sections */
-        @keyframes fadeIn {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Floating music icon effect */
-        .music-icon {
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: white;
             font-size: 1.5em;
-            color: #70a1ff;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        /* Floating icon animation */
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        /* Content text styling */
-        .content-text {
-            color: #FFFFFF;
-            font-size: 1.1em;
-        }
-
-        /* Footer text styling */
-        .footer-text {
-            font-size: 0.9em;
-            color: #ffffff;
+            cursor: pointer;
         }
     </style>
     """, unsafe_allow_html=True
 )
 
-# Adding floating music notes across the page
+# JavaScript for modal functionality
 st.markdown(
     """
-    <div class="music-note note1">🎶</div>
-    <div class="music-note note2">🎵</div>
-    <div class="music-note note3">🎶</div>
-    <div class="music-note note4">🎵</div>
-    <div class="music-note note5">🎶</div>
-    <div class="music-note note6">🎵</div>
-    <div class="music-note note7">🎶</div>
-    <div class="music-note note8">🎵</div>
-    <div class="music-note note9">🎶</div>
-    <div class="music-note note10">🎵</div>
+    <script>
+        function openModal(videoSrc) {
+            var modal = document.getElementById("videoModal");
+            var video = document.getElementById("modalVideo");
+            video.src = videoSrc;
+            modal.style.display = "flex";
+        }
+
+        function closeModal() {
+            var modal = document.getElementById("videoModal");
+            var video = document.getElementById("modalVideo");
+            video.src = "";
+            modal.style.display = "none";
+        }
+    </script>
     """, unsafe_allow_html=True
 )
 
-# Header section with pulsing effect
-st.markdown('<div class="header"><h1>🎶 欢迎来到我的个人音乐网站 🎶</h1><p>吉他改编教学 | 乐理知识分享 | 即兴实战</p></div>', unsafe_allow_html=True)
+# Display video thumbnails
+st.markdown('<div class="video-container">', unsafe_allow_html=True)
 
-# Video selection interface
-st.markdown('<div class="section">', unsafe_allow_html=True)
-st.header("🎸 我的作品")
-st.markdown('<div class="music-icon">🎵</div>', unsafe_allow_html=True)
-
-# List of videos
+# Video thumbnails with overlay titles
 videos = {
     "APT.": "WeChat_20241101195742.mp4",
     "穿越时空的思念": "cyskdsn.mp4",
@@ -138,15 +133,33 @@ videos = {
     "海阔天空": "hktk.mp4"
 }
 
-# Dropdown for video selection
-selected_video = st.selectbox("选择一个视频播放：", options=list(videos.keys()))
-
-# Display the selected video
-st.video(videos[selected_video])
+for title, src in videos.items():
+    st.markdown(
+        f"""
+        <div class="video-thumbnail" onclick="openModal('{src}')">
+            <img src="https://via.placeholder.com/250x150.png?text=Thumbnail" alt="{title}" width="100%">
+            <div class="video-overlay">{title}</div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
 st.markdown('</div>', unsafe_allow_html=True)
 
-# Teaching content section
+# Modal HTML structure for video playback
+st.markdown(
+    """
+    <div id="videoModal" class="modal" onclick="closeModal()">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">×</span>
+            <video id="modalVideo" controls autoplay style="width: 100%; border-radius: 8px;"></video>
+        </div>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
+# Rest of the page content (e.g., teaching section)
 st.markdown('<div class="section">', unsafe_allow_html=True)
 st.header("🎼 吉他教学与乐理分享")
 st.markdown('<div class="music-icon">🎶</div>', unsafe_allow_html=True)
