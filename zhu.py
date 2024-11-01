@@ -4,85 +4,72 @@ import os
 # Set page title and layout
 st.set_page_config(page_title="个人网页 - 吉他改编教学与乐理分享", layout="centered")
 
-# Enhanced styles with a starry, animated background
+# Enhanced styles with neon background and floating music notes
 st.markdown(
     """
     <style>
-        /* Multi-layered animated starry sky */
+        /* Animated neon gradient background */
         body {
-            background: radial-gradient(circle at bottom, #1b2735, #090a0f);
+            background: linear-gradient(135deg, #2a2a72, #009ffd, #2a2a72, #004e92);
+            background-size: 400% 400%;
+            animation: neonBackground 10s infinite alternate;
             font-family: Arial, sans-serif;
             overflow-x: hidden;
             color: #FFFFFF;
         }
 
-        /* Add star layers */
-        .stars, .stars2, .stars3 {
+        /* Neon gradient animation */
+        @keyframes neonBackground {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        /* Floating music notes across the screen */
+        .music-note {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            background-repeat: repeat;
-            background-size: cover;
-            opacity: 0.6;
-        }
-        .stars {
-            background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
-            animation: moveStars 200s linear infinite;
-        }
-        .stars2 {
-            background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
-            animation: moveStars 150s linear infinite;
-            opacity: 0.4;
-        }
-        .stars3 {
-            background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
-            animation: moveStars 100s linear infinite;
-            opacity: 0.2;
+            font-size: 1.8em;
+            color: rgba(255, 255, 255, 0.6);
+            animation: floatNote 8s infinite linear;
         }
 
-        /* Star animations for parallax effect */
-        @keyframes moveStars {
-            from { transform: translateY(0); }
-            to { transform: translateY(-1000px); }
+        /* Floating music note animation */
+        @keyframes floatNote {
+            0% { transform: translateY(0) translateX(0); }
+            100% { transform: translateY(-100vh) translateX(10vw); }
         }
 
-        /* Pulsing header */
-        .header h1 {
+        /* Place music notes in different locations with unique delays */
+        .note1 { top: 90vh; left: 5vw; animation-delay: 0s; }
+        .note2 { top: 85vh; left: 15vw; animation-delay: 1s; }
+        .note3 { top: 95vh; left: 25vw; animation-delay: 2s; }
+        .note4 { top: 88vh; left: 35vw; animation-delay: 3s; }
+        .note5 { top: 93vh; left: 45vw; animation-delay: 4s; }
+        .note6 { top: 87vh; left: 55vw; animation-delay: 5s; }
+        .note7 { top: 92vh; left: 65vw; animation-delay: 6s; }
+        .note8 { top: 89vh; left: 75vw; animation-delay: 7s; }
+        .note9 { top: 94vh; left: 85vw; animation-delay: 8s; }
+        .note10 { top: 91vh; left: 95vw; animation-delay: 9s; }
+
+        /* Glowing text effects */
+        .header h1, .section h1, .section h2 {
+            color: #FFFFFF;
+            text-shadow: 0 0 10px #70a1ff, 0 0 20px #70a1ff;
             font-family: 'Courier New', Courier, monospace;
-            font-size: 2em;
-            color: #70a1ff;
-            margin-bottom: 0.2em;
-            animation: pulse 2s infinite;
         }
 
-        /* Pulse effect */
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        /* Section styling with glow effect */
+        /* Glowing sections */
         .section {
             background: rgba(255, 255, 255, 0.1);
             padding: 20px;
             border-radius: 12px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+            box-shadow: 0px 4px 15px rgba(112, 161, 255, 0.8);
             margin-bottom: 20px;
             text-align: center;
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             animation: fadeIn 1.5s ease forwards;
-        }
-
-        /* Section glow */
-        .section:hover {
-            border-color: #70a1ff;
-            box-shadow: 0 0 20px rgba(112, 161, 255, 0.8);
         }
 
         /* Fade-in effect for sections */
@@ -91,14 +78,14 @@ st.markdown(
             100% { opacity: 1; transform: translateY(0); }
         }
 
-        /* Music icon floating effect */
+        /* Floating music icon effect */
         .music-icon {
             font-size: 1.5em;
             color: #70a1ff;
             animation: float 3s ease-in-out infinite;
         }
 
-        /* Floating music icon animation */
+        /* Floating icon animation */
         @keyframes float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
@@ -119,12 +106,19 @@ st.markdown(
     """, unsafe_allow_html=True
 )
 
-# Adding star layers for parallax background
+# Adding floating music notes across the page
 st.markdown(
     """
-    <div class="stars"></div>
-    <div class="stars2"></div>
-    <div class="stars3"></div>
+    <div class="music-note note1">🎶</div>
+    <div class="music-note note2">🎵</div>
+    <div class="music-note note3">🎶</div>
+    <div class="music-note note4">🎵</div>
+    <div class="music-note note5">🎶</div>
+    <div class="music-note note6">🎵</div>
+    <div class="music-note note7">🎶</div>
+    <div class="music-note note8">🎵</div>
+    <div class="music-note note9">🎶</div>
+    <div class="music-note note10">🎵</div>
     """, unsafe_allow_html=True
 )
 
