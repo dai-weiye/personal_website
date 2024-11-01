@@ -1,5 +1,6 @@
 import streamlit as st
 import os
+import base64
 
 # 设置页面标题和布局
 st.set_page_config(page_title="个人网页 - 吉他改编教学与乐理分享", layout="centered")
@@ -165,11 +166,17 @@ st.markdown(
         }
 
         .video-frame {
-            border: 10px solid transparent;
+            border: 15px solid transparent;
             padding: 10px;
-            border-image-source: url('https://i.imgur.com/your_border_image.png'); /* 替换为您的花边图片URL */
+            border-image-source: url('https://i.imgur.com/5X9pYwR.png'); /* 请替换为您的花边图片URL */
             border-image-slice: 30;
             border-image-repeat: round;
+            border-image-width: 15px;
+        }
+
+        .video-frame video {
+            width: 700px;
+            height: auto;
         }
     </style>
     """, unsafe_allow_html=True
@@ -199,23 +206,16 @@ st.markdown('<div class="section">', unsafe_allow_html=True)
 st.header("🎸 我的作品")
 st.markdown('<div class="music-icon">🎵</div>', unsafe_allow_html=True)
 
-# 视频展示
+# 视频展示函数
 def display_video(title, video_file):
     st.subheader(title)
-    video_bytes = open(video_file, 'rb').read()
-    st.markdown(
-        f"""
-        <div class="video-container">
-            <div class="video-frame">
-                <video controls width="700">
-                    <source src="data:video/mp4;base64,{video_bytes.decode('utf-8')}" type="video/mp4">
-                </video>
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+    st.markdown('<div class="video-container">', unsafe_allow_html=True)
+    st.markdown('<div class="video-frame">', unsafe_allow_html=True)
+    st.video(video_file)
+    st.markdown('</div>', unsafe_allow_html=True)
+    st.markdown('</div>', unsafe_allow_html=True)
 
+# 请确保视频文件位于应用程序运行的目录中，或者提供正确的路径或URL
 display_video("APT.", "WeChat_20241101195742.mp4")
 display_video("穿越时空的思念", "cyskdsn.mp4")
 display_video("春泥", "cn.mp4")
